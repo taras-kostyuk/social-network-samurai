@@ -1,0 +1,13 @@
+.header {
+    grid-area: header;
+    background: black;
+}
+
+.logo{
+    position: absolute;
+    width: 80px;
+}
+.mainLogo{
+
+
+}

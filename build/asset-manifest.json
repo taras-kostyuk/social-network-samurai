@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c47e8820.chunk.css",
+    "main.js": "/static/js/main.bdefa3d1.chunk.js",
+    "main.js.map": "/static/js/main.bdefa3d1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.336ecf86.js",
+    "runtime-main.js.map": "/static/js/runtime-main.336ecf86.js.map",
+    "static/js/2.03cd15c4.chunk.js": "/static/js/2.03cd15c4.chunk.js",
+    "static/js/2.03cd15c4.chunk.js.map": "/static/js/2.03cd15c4.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7a897e1622debb05a221f5d25fea25aa.js": "/precache-manifest.7a897e1622debb05a221f5d25fea25aa.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.c47e8820.chunk.css.map": "/static/css/main.c47e8820.chunk.css.map",
+    "static/js/2.03cd15c4.chunk.js.LICENSE.txt": "/static/js/2.03cd15c4.chunk.js.LICENSE.txt",
+    "static/media/cros.png": "/static/media/cros.642fa189.png",
+    "static/media/logo-samurai.png": "/static/media/logo-samurai.e552fec3.png",
+    "static/media/the-samurai.png": "/static/media/the-samurai.808b657c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.336ecf86.js",
+    "static/js/2.03cd15c4.chunk.js",
+    "static/css/main.c47e8820.chunk.css",
+    "static/js/main.bdefa3d1.chunk.js"
+  ]
+}

@@ -1,0 +1,14 @@
+.nav {
+    grid-area: nav;
+    background: grey;
+    padding: 20px;
+}
+.item a {
+    color: white;
+    text-decoration: none;
+    font-size: x-large;
+    font-family: Bradley Hand, cursive ;
+}
+.item a.active {
+    color: gold;
+}
