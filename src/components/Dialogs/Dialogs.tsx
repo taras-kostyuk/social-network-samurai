@@ -6,12 +6,15 @@ import {DialogPageType, sendMessage, updateNewMessageBody} from "../../Redux/sto
 
 type DialogsPropsType = {
     dialogsPage: DialogPageType
-    dispatch: Function
+
+    updateNewMessageBody: (body:any) => void
+    sendMessage:Function
+
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
-    debugger
-// let state = props.store.getState().dialogsPage
+
+let state = props.dialogsPage
     let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
 
     let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message}/>)
@@ -23,11 +26,12 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     let newMessageBody = props.dialogsPage.updateNewMessageBody
     let onSendMessageClick = () => {
-        props.dispatch(sendMessage())
+        props.sendMessage()
     }
     let onNewMessageChange = (e: any) => {
         let body = e.target.value
-        props.dispatch(updateNewMessageBody(body))
+        props.updateNewMessageBody(body)
+
     }
 
     return (

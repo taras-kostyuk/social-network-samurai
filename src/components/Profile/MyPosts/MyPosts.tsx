@@ -1,31 +1,32 @@
 import React, {ChangeEvent} from "react"
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {addPostAC, changeNewTextAC, ProfilePageType} from "../../../Redux/store";
+import {PostType, ProfilePageType} from "../../../Redux/store";
 
 
 type MyPostsType = {
-
-    profilePage: ProfilePageType
-
-    dispatch: Function
+    changeNewText: (newText: string) => void
+    addPostHandler: (text:string) => void
+    posts: Array<PostType>
+    messageForNewPost: string
 }
 
 export const MyPosts = (props: MyPostsType) => {
 
-    let postsElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
 
     let addPostHandler = () => {
 
-        //props.addPostHandler(props.profilePage.messageForNewPost)
-        props.dispatch(addPostAC(props.profilePage.messageForNewPost))
+        props.addPostHandler(props.messageForNewPost)
+        //props.dispatch(addPostAC(props.profilePage.messageForNewPost))
 
     }
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        //props.changeNewText(e.currentTarget.value)
-        debugger
-        props.dispatch(changeNewTextAC(e.currentTarget.value))
+    let newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+
+        props.changeNewText(e.currentTarget.value)
+
+       // props.dispatch(changeNewTextAC(e.currentTarget.value))
     }
 
     return (
@@ -33,7 +34,7 @@ export const MyPosts = (props: MyPostsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea value={props.profilePage.messageForNewPost}
+                    <textarea value={props.messageForNewPost}
                               onChange={newTextChangeHandler}>
 
                     </textarea>

@@ -9,7 +9,8 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {RootStateType} from "./Redux/store";
 import {Profile} from "./components/Profile/Profile";
-import {RootStateTypeRedux, StoreReduxType} from "./Redux/redux-store";
+import {store, StoreReduxType} from "./Redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
@@ -31,16 +32,15 @@ debugger
                 <div className="app-wrapper-content">
 
                     <Route path='/dialogs' render={() =>
-                        <Dialogs
-                            dialogsPage={state.dialogReducer}
-                            dispatch={props.dispatch}
+                        <DialogsContainer
+                           store={store}
                         />}/>
 
 
                     <Route path='/profile' render={() =>
                         <Profile
-                            profilePage={state.profileReducer}
-                            dispatch={props.dispatch}
+
+                            store={props.store}
                             // addPost={props.store.addPost.bind(props.store)}
                             // changeNewText={props.store.changeNewText.bind(props.store)}
                         />}
