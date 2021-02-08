@@ -20,8 +20,8 @@ type AppPropsType = {
 }
 
 
-export const App: React.FC<AppPropsType> = (props: AppPropsType) => {
-let state =  props.store.getState()
+export const App = () => {
+//let state =  props.store.getState()
 debugger
     return (
 
@@ -33,16 +33,16 @@ debugger
 
                     <Route path='/dialogs' render={() =>
                         <DialogsContainer
-                           store={store}
-                        />}/>
+                          // store={store}
+                            />}/>
 
 
                     <Route path='/profile' render={() =>
                         <Profile
 
-                            store={props.store}
-                            // addPost={props.store.addPost.bind(props.store)}
-                            // changeNewText={props.store.changeNewText.bind(props.store)}
+                           // store={props.store}
+                            // //addPost={props.store.addPost.bind(props.store)}
+                            // //changeNewText={props.store.changeNewText.bind(props.store)}
                         />}
                         // messageForNewPost={state.profilePage.messageForNewPost}
 

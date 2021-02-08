@@ -11,12 +11,13 @@ type ProfilePropsType = {
     store:StoreReduxType
 }
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = () => {
 
     return <div>
         <ProfileInfo/>
 
-        <MyPostsContainer store={props.store} />
+        <MyPostsContainer //store={props.store}
+        />
 
     </div>
 }

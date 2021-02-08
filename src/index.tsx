@@ -1,16 +1,19 @@
 import React from 'react';
 
 import './index.css';
-import {store} from "./Redux/redux-store";
+import {RootStateTypeRedux, store} from "./Redux/redux-store";
 import ReactDOM from "react-dom";
 import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "./StoreContext";
 
-export const rerenderEntireTree = (state: any) => {
+export const rerenderEntireTree = (state: RootStateTypeRedux) => {
 
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} store={store} dispatch={store.dispatch.bind(store)}/>
+            <Provider store={store}>
+            <App/>
+            </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
 }
@@ -18,3 +21,5 @@ export const rerenderEntireTree = (state: any) => {
 rerenderEntireTree(store.getState())
 
 store.subscribe(()=> rerenderEntireTree(store.getState()))
+
+// було в App state={state} store={store} dispatch={store.dispatch.bind(store)}

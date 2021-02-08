@@ -4,23 +4,34 @@ import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogPageType, sendMessage, updateNewMessageBody} from "../../Redux/store";
 import {Dialogs} from "./Dialogs";
-import {StoreReduxType} from "../../Redux/redux-store";
+import {store, StoreReduxType} from "../../Redux/redux-store";
+import {StoreContext} from "../../StoreContext";
 
 type DialogsContainerPropsType = {
 
-store:StoreReduxType
+    store: StoreReduxType
 }
 
- export const DialogsContainer = (props: DialogsContainerPropsType) => {
+export const DialogsContainer = () => {
 
- let state = props.store.getState().dialogReducer
 
-    let onSendMessageClick = () => {
-        props.store.dispatch(sendMessage())
+
+    return <StoreContext.Consumer>
+        {
+        (store) => {
+            let state = store.getState().dialogReducer
+
+            let onSendMessageClick = () => {
+                store.dispatch(sendMessage())
+            }
+            let onNewMessageChange = (body: any) => {
+                store.dispatch(updateNewMessageBody(body))
+            }
+            return <Dialogs updateNewMessageBody={onNewMessageChange}
+                     sendMessage={onSendMessageClick}
+                     dialogsPage={state}/>
+        }
+
     }
-    let onNewMessageChange = (body: any) => {
-        props.store.dispatch(updateNewMessageBody(body))
-    }
-
-    return <Dialogs updateNewMessageBody={onNewMessageChange} sendMessage={onSendMessageClick} dialogsPage={state} />
+    </StoreContext.Consumer>
 }
