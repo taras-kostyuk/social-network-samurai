@@ -20,19 +20,26 @@ let initialState = {
 
     ]
 }
-export const profileReducer = (state = initialState , action:ActionsTypes) => {
+export const profileReducer = (state = initialState, action: ActionsTypes) => {
     if (action.type === "ADD-POST") {
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            message: action.postMessageNew,
-            likesCount: 0
+        {
+            const newPost: PostType = {
+                id: new Date().getTime(),
+                message: action.postMessageNew,
+                likesCount: 0
+            }
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                messageForNewPost: ''
+            }
         }
-        state.posts.push(newPost)
-        state.messageForNewPost = ""
-
 
     } else if (action.type === "CHANGE-NEW-TEXT") {
-        state.messageForNewPost = action.newText;
+        return {
+            ...state,
+            messageForNewPost: action.newText
+        }
 
     }
     return state

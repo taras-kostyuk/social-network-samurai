@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react"
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostType, ProfilePageType} from "../../../Redux/store";
+import {PostType} from "../../../Redux/store";
 
 
 type MyPostsType = {
@@ -9,9 +9,10 @@ type MyPostsType = {
     addPostHandler: (text:string) => void
     posts: Array<PostType>
     messageForNewPost: string
+
 }
 
-export const MyPosts = (props: MyPostsType) => {
+export const MyPosts = (props:MyPostsType) => {
 
     let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 

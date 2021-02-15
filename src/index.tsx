@@ -1,13 +1,13 @@
 import React from 'react';
 
 import './index.css';
-import {RootStateTypeRedux, store} from "./Redux/redux-store";
+import { store} from "./Redux/redux-store";
 import ReactDOM from "react-dom";
 import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
-import {Provider} from "./StoreContext";
+import {Provider} from "react-redux";
+import {RootStateType} from "./Redux/store";
 
-export const rerenderEntireTree = (state: RootStateTypeRedux) => {
 
     ReactDOM.render(
         <BrowserRouter>
@@ -16,10 +16,9 @@ export const rerenderEntireTree = (state: RootStateTypeRedux) => {
             </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
-}
 
-rerenderEntireTree(store.getState())
 
-store.subscribe(()=> rerenderEntireTree(store.getState()))
+
+
 
 // було в App state={state} store={store} dispatch={store.dispatch.bind(store)}

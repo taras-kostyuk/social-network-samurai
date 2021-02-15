@@ -36,13 +36,16 @@ let InitialState = {
 
 export const dialogReducer = (state= InitialState, action:ActionsTypes) => {
 
+    if (action.type === "UPDATE-NEW-MESSAGE-BODY")
+    return {...state,
+        updateNewMessageBody: action.body}
 
-    if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-        state.updateNewMessageBody = action.body
-    } else if (action.type === "SEND-MESSAGE") {
+     else if (action.type === "SEND-MESSAGE"){
         let body = state.updateNewMessageBody
-        state.updateNewMessageBody = ""
-        state.messages.push({id: 6, message: body})
-    }
+    return {
+            ...state,
+            updateNewMessageBody: "",
+            messages: [...state.messages,{id:6, message:body}]
+        }}
     return state
-}
+    }

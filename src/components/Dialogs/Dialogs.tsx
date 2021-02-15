@@ -2,11 +2,10 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {DialogPageType, sendMessage, updateNewMessageBody} from "../../Redux/store";
+import {DialogPageType} from "../../Redux/store";
 
 type DialogsPropsType = {
     dialogsPage: DialogPageType
-
     updateNewMessageBody: (body:any) => void
     sendMessage:Function
 
@@ -15,9 +14,9 @@ type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
 let state = props.dialogsPage
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
 
-    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message}/>)
+    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id} />)
 
     // let newMessageElement = React.createRef<HTMLTextAreaElement>()
     /*let addMessage = () => {

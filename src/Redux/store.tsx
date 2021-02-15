@@ -53,8 +53,8 @@ export type StoreType = {
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof changeNewTextAC> |
-    ReturnType<typeof updateNewMessageBody> |
-    ReturnType<typeof sendMessage>
+    ReturnType<typeof updateNewMessageBodyAC> |
+    ReturnType<typeof sendMessageAC>
 
 export const addPostAC = (postMessageNew: string) => {
     return {
@@ -68,14 +68,15 @@ export const changeNewTextAC = (newText: string) => {
         newText: newText
     } as const
 }
-export const updateNewMessageBody = (body: string) => {
+export const updateNewMessageBodyAC = (body: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         body: body
     } as const
 
+
 }
-export const sendMessage = () => {
+export const sendMessageAC = () => {
     return {
         type: "SEND-MESSAGE",
 
