@@ -3,8 +3,8 @@ import {UserType} from "../components/users/Users";
 
 type followAT = {
     type: 'FOLLOW'
-    followed: boolean
     userId: number
+    followed: boolean
 
 
 }

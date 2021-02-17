@@ -1,11 +1,13 @@
 import React from "react";
 import styles from './users.module.css'
-
+import axios from "axios";
+    import userPhoto from '../../assets/image/user.png'
 export type UserType = {
+
     id: number
-    photoUrl: string
+    photos: any
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 
@@ -16,47 +18,24 @@ type LocationType = {
 }
 type UsersPropsType = {
     users: Array<UserType>
-    setUsers: (users: Array<UserType>) => void
+    setUsers: (data:any) => void
     unFollow: (userId: number) => void
     follow: (userId: number) => void
 }
 
 export let Users = (props: UsersPropsType) => {
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu-YqulMZcEfj9wAhJAG3Xy3FCk2fNHBbi3g&usqp=CAU',
-                followed: true,
-                fullName: 'Dmitry',
-                status: 'I am a boss',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu-YqulMZcEfj9wAhJAG3Xy3FCk2fNHBbi3g&usqp=CAU',
-                followed: true,
-                fullName: 'Sasha',
-                status: 'I am a boss',
-                location: {city: 'Kiev', country: 'Ukraine'}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu-YqulMZcEfj9wAhJAG3Xy3FCk2fNHBbi3g&usqp=CAU',
-                followed: false,
-                fullName: 'Andrew',
-                status: 'I am a boss',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((response:any) => {
+            props.setUsers(response.data.items)
+        })
 
-        ])
     }
 
     return <div>
         {
             props.users.map(u => <div key={u.id}>
                  <span>
-                     <div><img src={u.photoUrl} alt="Avatar" className={styles.userPhoto}/></div>
+                     <div><img src={u.photos.small != null ? u.photos.small : userPhoto } alt="Avatar" className={styles.userPhoto}/></div>
                      <div>{u.followed
                          ? <button onClick={() => {
                              props.unFollow(u.id)
@@ -67,8 +46,8 @@ export let Users = (props: UsersPropsType) => {
                          </div>
                          </span>
                 <span>
-                         <span><div>{u.fullName}</div><div>{u.status}</div></span>
-                         <span><div>{u.location.country}</div><div>{u.location.city}</div></span>
+                         <span><div>{u.name}</div><div>{u.status}</div></span>
+                         <span><div>{"u.location.country"}</div><div>{"u.location.city"}</div></span>
                          </span>
             </div>)
         }
