@@ -30,7 +30,7 @@ debugger
 
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/profile' render={() => <Profile/>}/>
-                    <Route path='/user' render={() => <UsersContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/news' component={News}/>
                     <Route path='/settings' component={Settings}/>
