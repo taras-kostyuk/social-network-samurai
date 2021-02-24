@@ -1,5 +1,5 @@
+import {UserType} from "../components/users/UsersContainer";
 
-import {UserType} from "../components/users/Users";
 
 type followAT = {
     type: 'FOLLOW'
@@ -40,12 +40,14 @@ export type UsersType = {
     pageSize: number
     totalUsersCount: number
     currentPage:number
+    isFetching:boolean
 }
 let initialState: UsersType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage:1
+    currentPage:1,
+    isFetching:false
 
 }
 export const usersReducer = (state = initialState, action: ActionsTypes) => {
