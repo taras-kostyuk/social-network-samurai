@@ -20,7 +20,7 @@ import UsersContainer from "./components/users/UsersContainer";
 
 export const App = () => {
 //let state =  props.store.getState()
-debugger
+
     return (
 
             <div className="app-wrapper">
