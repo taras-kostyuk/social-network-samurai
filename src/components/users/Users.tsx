@@ -4,7 +4,6 @@ import userPhoto from "../../assets/image/user.png";
 import {UserType} from "./UsersContainer";
 
 
-
 type UsersType = {
     totalUsersCount: number
     pageSize: number
@@ -43,10 +42,13 @@ export let Users = (props: UsersType) => {
             props.users.map(u => <div key={u.id}>
     <span>
         <div>
+
+            <a href = {'/profile/' + u.id}>
             <img src={u.photos.small != null ? u.photos.small : userPhoto}
                  alt="Avatar"
                  className={styles.userPhoto}
             />
+            </a>
         </div>
     <div>{
         u.followed
@@ -55,22 +57,22 @@ export let Users = (props: UsersType) => {
             }
             }>
                 unFollow </button>
-                :
-                <button onClick={() => {
-                    props.follow(u.id)
-                }
-                }>
-                    Follow </button>}
+            :
+            <button onClick={() => {
+                props.follow(u.id)
+            }
+            }>
+                Follow </button>}
                     </div>
     </span>
-    < span>
+                < span>
     <span><div>{u.name}
         </div><div>{u.status}</div> </span>
     < span> <div>{"u.location.country"}
         </div><div>{"u.location.city"}</div> </span>
     </span>
-    </div>)
-}
+            </div>)
+        }
     </div>
 
 }
