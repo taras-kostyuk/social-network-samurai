@@ -12,11 +12,7 @@ import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
-/*type AppPropsType = {
-    state: RootStateType
-    store: StoreReduxType
-    dispatch: Function
-}*/
+
 
 
 export const App = () => {
@@ -30,7 +26,7 @@ export const App = () => {
                 <div className="app-wrapper-content">
 
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile' render={() => <ProfileContainer/>}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/news' component={News}/>
