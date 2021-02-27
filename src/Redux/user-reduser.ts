@@ -3,7 +3,7 @@ import {UserType} from "../components/users/UsersContainer";
 
 type followAT = {
     type: 'FOLLOW'
-    userId: number
+    id: number
     followed: boolean
 
 
@@ -11,7 +11,7 @@ type followAT = {
 type unFollowAT = {
     type: 'UNFOLLOW'
     followed: boolean
-    userId: number
+    id: number
 }
 type setUsersAT = {
     type: 'SET_USERS'
@@ -61,7 +61,7 @@ export const usersReducer = (state = initialState, action: ActionsTypes) => {
             return {
                 ...state,
                 users: state.users.map(u => {
-                    if (u.id === action.userId) {
+                    if (u.id === action.id) {
                         return {...u, followed: true}
                     }
                     return u
@@ -71,7 +71,7 @@ export const usersReducer = (state = initialState, action: ActionsTypes) => {
             return {
                 ...state,
                 users: state.users.map(u => {
-                    if (u.id === action.userId) {
+                    if (u.id === action.id) {
                         return {...u, followed: false}
                     }
                     return u
@@ -96,8 +96,8 @@ export const usersReducer = (state = initialState, action: ActionsTypes) => {
     return state
 }
 export const setCurrentPage = (currentPage:any) => ({type:'SET_CURRENT_PAGE',currentPage:currentPage })
-export const follow = (userId: number) => ({type: 'FOLLOW', userId})
-export const unFollow = (userId: number) => ({type: 'UNFOLLOW', userId})
+export const follow = (id: number) => ({type: 'FOLLOW', id})
+export const unFollow = (id: number) => ({type: 'UNFOLLOW', id})
 export const setUsers = (users: Array<UserType>) => ({type: 'SET_USERS', users})
 export const setTotalUsersCount = (totalUsersCount:any) => ({type: 'SET_TOTAL_USERS_COUNT', count: totalUsersCount})
 export const toggleSetIsFetching = (isFetching:boolean) => ({type: 'TOGGLE_IS_FETCHING', isFetching})

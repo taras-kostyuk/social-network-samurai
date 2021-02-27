@@ -8,7 +8,7 @@ import {withRouter, RouteComponentProps} from "react-router-dom"
 
 
 type PathParamType = {
-    userId:string
+    id:string
 }
 
 type MapStatePropsType = {
@@ -23,7 +23,7 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export class ProfileContainer extends React.Component<PropsType,any> {
     componentDidMount() {
-        let userId = this.props.match.params.userId
+        let userId = this.props.match.params.id
         if (!userId) {
             userId = "2"
         }

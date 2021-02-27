@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./users.module.css";
 import userPhoto from "../../assets/image/user.png";
 import {UserType} from "./UsersContainer";
+import axios from "axios";
 
 
 type UsersType = {
@@ -53,13 +54,31 @@ export let Users = (props: UsersType) => {
     <div>{
         u.followed
             ? <button onClick={() => {
-                props.unFollow(u.id)
+                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
+                    withCredentials:true,
+                    headers:{
+                        "API-KEY":"8dc404ff-3523-492a-9e90-857619657bf6"
+                    }
+                })
+                    .then(response => {
+                        if (response.data.resultCode === 0){props.unFollow(u.id)}
+                    });
+
             }
             }>
                 unFollow </button>
             :
             <button onClick={() => {
-                props.follow(u.id)
+                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{
+                    withCredentials:true,
+                    headers:{
+                        "API-KEY":"8dc404ff-3523-492a-9e90-857619657bf6"
+                    }
+                })
+                    .then(response => {
+                        if (response.data.resultCode === 0){props.follow(u.id)}
+                    });
+
             }
             }>
                 Follow </button>}

@@ -1,0 +1,21 @@
+.header {
+    grid-area: header;
+    background: black;
+}
+
+.logo{
+    position: absolute;
+    width: 80px;
+}
+.loginBlock{
+    float: right;
+    color: darkred;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-right: 30px;
+
+}
+.loginBlock a {
+    color: darkred;
+
+}

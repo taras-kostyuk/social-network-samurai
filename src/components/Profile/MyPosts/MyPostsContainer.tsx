@@ -49,7 +49,7 @@ type disp = {
 }
 
     let  mapStateToProps =(state:RootStoreType) => {
-    debugger;
+
     return{
         messageForNewPost: state.profileReducer.messageForNewPost,
         posts: state.profileReducer.posts
