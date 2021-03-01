@@ -30,7 +30,7 @@ let initialState:InitialStateType = {
 export const authReducer = (state = initialState, action: ActionsTypes):InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-            debugger
+
             return {
                 ...state,
                 ...action.data,
