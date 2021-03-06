@@ -4,7 +4,9 @@ import {Dialogs} from "./Dialogs";
 
 import {connect} from "react-redux";
 import {RootStoreType} from "../../Redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 /*
 type DialogsContainerPropsType = {
@@ -36,18 +38,24 @@ type DialogsContainerPropsType = {
     </StoreContext.Consumer>
 }*/
 
-let mapStateToProps =(state:RootStoreType) => {
+let mapStateToProps = (state: RootStoreType) => {
     return {
-        dialogsPage: state.dialogReducer,
-        isAuth: state.auth.isAuth
+        dialogsPage: state.dialogReducer
+
     }
 }
-let mapDispatchToProps =(dispatch:Dispatch) => {
-    return{
-        updateNewMessageBody : (body:string) => {dispatch(updateNewMessageBodyAC(body))},
-        sendMessage : () => {dispatch(sendMessageAC())}
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        updateNewMessageBody: (body: string) => {
+            dispatch(updateNewMessageBodyAC(body))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageAC())
+        }
 
     }
 }
 
-export const DialogsContainer = connect (mapStateToProps,mapDispatchToProps) (Dialogs)
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)

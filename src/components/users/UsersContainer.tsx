@@ -13,6 +13,8 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 export type UserType = {
 
@@ -102,34 +104,15 @@ let mapStateToProps = (state: RootStoreType) => {
 
     }
 }
-/*let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unFollow: (userId: number) => {
-            dispatch(unFollowAC(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching:boolean) => {
-            dispatch(toggleSetIsFetchingAC(isFetching))
-        }
-    }
-}*/
 
-export default connect(mapStateToProps,
-    {
-        follow,
-        unFollow,
-        setCurrentPage,
-        toggleFollowingProgress,
-        getUsers
-    })(UsersContainer)
+
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps,
+        {
+            follow,
+            unFollow,
+            setCurrentPage,
+            toggleFollowingProgress,
+            getUsers
+        }))(UsersContainer)
