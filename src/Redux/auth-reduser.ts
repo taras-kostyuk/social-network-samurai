@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
 
 type DataType ={
     id: number
@@ -27,7 +29,7 @@ let initialState:InitialStateType = {
     isAuth:false
 
 }
-export const authReducer = (state = initialState, action: ActionsTypes):InitialStateType => {
+export const    authReducer = (state = initialState, action: ActionsTypes):InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
 
@@ -41,5 +43,13 @@ export const authReducer = (state = initialState, action: ActionsTypes):InitialS
     }
     return state
 }
-export const setAuthUserData = (id:string, email:string, login:string) => ({type:SET_USER_DATA,data:{id: id,email,login}})
 
+export const setAuthUserData = (id:string, email:string, login:string) => ({type:SET_USER_DATA,data:{id: id,email,login}})
+export const getAuthUserData = () => (dispatch:Dispatch) => {
+    authAPI.me().then(response => {
+    if(response.data.resultCode === 0) {
+        let{id,email,login} = response.data.data
+        dispatch(setAuthUserData(id,email,login))
+    }
+
+});}

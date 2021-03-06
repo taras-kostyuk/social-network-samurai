@@ -1,21 +1,27 @@
 import React from "react"
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../Redux/profile-reducer";
+import {getUserProfile} from "../../Redux/profile-reducer";
 import {RootStoreType} from "../../Redux/redux-store";
-import {withRouter, RouteComponentProps} from "react-router-dom"
+import {withRouter, RouteComponentProps, Redirect} from "react-router-dom"
+
 
 
 type PathParamType = {
-    id:string
-}
+    userId:string
 
+}
+type ProfilePropsType ={
+
+}
 type MapStatePropsType = {
-    profile:any
+    profile:ProfilePropsType
+    isAuth:boolean
 }
 type MapDispatchPropsType ={
-    setUserProfile: (profile:any) => void
+
+    getUserProfile:(userId:string) => void
+
 }
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
@@ -23,24 +29,47 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export class ProfileContainer extends React.Component<PropsType,any> {
     componentDidMount() {
-        let userId = this.props.match.params.id
+        let userId = this.props.match.params.userId
         if (!userId) {
             userId = "2"
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                this.props.setUserProfile(response.data)
+        } debugger
+        this.props.getUserProfile(userId)
 
-            });
     }
-
     render(){
+
+        if (!this.props.isAuth) return <Redirect to={"/login"}/>
     return <Profile {...this.props} profile={this.props.profile} />
 
 }}
 let mapStateToProps = (state:RootStoreType):MapStatePropsType => ({
-profile:state.profileReducer.profile
+profile:state.profileReducer.profile,
+    isAuth: state.auth.isAuth
 })
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect  (mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
+export default connect  (mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
+
+
+/*
+"aboutMe": string,
+    "contacts": {
+    "facebook": string,
+        "website": null,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": null,
+        "github": string,
+        "mainLink": null
+},
+"lookingForAJob": true,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+    "small": string,
+        "large": string
+}*/
+
+

@@ -8,7 +8,6 @@ type HeaderPropsType ={
     login:string
 }
 const Header = (props:HeaderPropsType) => {
-
     return <header className={s.header}>
         <img className={s.logo} src={Logo} alt="logo"/>
         <img className={s.mainLogo} src={MainLogo} alt="mainLogo"/>
