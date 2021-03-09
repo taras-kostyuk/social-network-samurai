@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 
 export type PostType = {
@@ -9,15 +9,20 @@ export type PostType = {
 }
 
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 type setUserProfileType = {
     type:'SET_USER_PROFILE'
 }
+
 export type ActionsTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof changeNewTextAC> |
     ReturnType<typeof updateNewMessageBodyAC> |
     ReturnType<typeof sendMessageAC>|
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile>|
+    ReturnType<typeof setStatus>
+
+
 
 export const addPostAC = (postMessageNew: string) => {
     return {
@@ -38,6 +43,12 @@ export const changeNewTextAC = (newText: string) => {
         newText: newText
     } as const
 }
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: body
+    } as const
+}
 let initialState = {
     messageForNewPost: "",
     posts: [
@@ -45,24 +56,37 @@ let initialState = {
         {id: 2, message: 'It\'s my firs post', likesCount: 45},
 
     ],
-    profile:null
+    profile:null,
+    status:""
 
 }
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    } as const
 
-
-}
 export const setUserProfile = (profile:any) => ({type:SET_USER_PROFILE,profile} as const)
+export const setStatus = (status:string) => ({type:SET_STATUS,status} as const )
+
 export const getUserProfile = (userId:string) => (dispatch:Dispatch) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch( setUserProfile(response.data))
 
     });
 }
+export const getStatus = (status:string) => (dispatch:Dispatch) => {
+    profileAPI.getStatus(status)
+        .then(response => {
+        dispatch( setStatus(response.data))
+
+    });
+}
+export const updateStatus = (status:string) => (dispatch:Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0)
+            dispatch( setStatus(response.data.status))
+
+        });
+}
+
+
 
 export const profileReducer = (state = initialState, action: ActionsTypes) => {
     if (action.type === "ADD-POST") {
@@ -90,6 +114,12 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
         return{
             ...state,profile:action.profile
         }
+    }else if (action.type === 'SET_STATUS'){
+        return {
+            ...state,
+            status:action.status
+        }
     }
+
     return state
 }
