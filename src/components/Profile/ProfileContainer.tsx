@@ -3,9 +3,9 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getStatus, getUserProfile, updateStatus} from "../../Redux/profile-reducer";
 import {RootStoreType} from "../../Redux/redux-store";
-import {withRouter, RouteComponentProps, Redirect} from "react-router-dom"
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {RouteComponentProps, withRouter} from "react-router-dom"
 import {compose} from "redux";
+
 type PathParamType = {
     userId:string
 
@@ -42,6 +42,13 @@ export class ProfileContainer extends React.Component<PropsType,any> {
         this.props.getStatus(userId)
 
     }
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<any>, snapshot?: any) {
+        if(prevProps.status !== this.props.status)
+        this.setState({
+            status:this.props.status
+        })
+    }
+
     render(){
 
 
