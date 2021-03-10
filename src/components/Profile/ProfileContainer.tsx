@@ -6,10 +6,6 @@ import {RootStoreType} from "../../Redux/redux-store";
 import {withRouter, RouteComponentProps, Redirect} from "react-router-dom"
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
-
-
-
-
 type PathParamType = {
     userId:string
 

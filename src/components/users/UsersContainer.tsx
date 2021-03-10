@@ -94,6 +94,7 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
 }
 
 let mapStateToProps = (state: RootStoreType) => {
+
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
