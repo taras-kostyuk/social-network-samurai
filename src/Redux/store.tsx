@@ -77,9 +77,9 @@ export const updateNewMessageBodyAC = (body: string) => {
 
 
 }
-export const sendMessageAC = () => {
+export const sendMessageAC = (newMessageBody:string) => {
     return {
-        type: "SEND-MESSAGE",
+        type: "SEND-MESSAGE",newMessageBody
 
     } as const
 }

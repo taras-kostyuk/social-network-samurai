@@ -7,9 +7,10 @@ export const updateNewMessageBody = (body: string) => {
     } as const
 
 }
-export const sendMessage = () => {
+export const sendMessage = (newMessageBody:string) => {
     return {
         type: "SEND-MESSAGE",
+        newMessageBody
 
     } as const
 }
@@ -41,10 +42,10 @@ export const dialogReducer = (state= InitialState, action:ActionsTypes) => {
         updateNewMessageBody: action.body}
 
      else if (action.type === "SEND-MESSAGE"){
-        let body = state.updateNewMessageBody
+        let body = action.newMessageBody
     return {
             ...state,
-            updateNewMessageBody: "",
+        newMessageBody: "",
             messages: [...state.messages,{id:6, message:body}]
         }}
     return state

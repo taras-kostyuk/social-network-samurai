@@ -7,6 +7,7 @@ import {RootStoreType} from "../../Redux/redux-store";
 import {compose, Dispatch} from "redux";
 
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {sendMessage} from "../../Redux/dialogs-reducer";
 
 /*
 type DialogsContainerPropsType = {
@@ -40,7 +41,8 @@ type DialogsContainerPropsType = {
 
 let mapStateToProps = (state: RootStoreType) => {
     return {
-        dialogsPage: state.dialogReducer
+        dialogsPage: state.dialogReducer,
+        isAuth: state.auth.isAuth
 
     }
 }
@@ -49,8 +51,8 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyAC(body))
         },
-        sendMessage: () => {
-            dispatch(sendMessageAC())
+        sendMessage: (newMessageBody:string) => {
+            dispatch(sendMessage(newMessageBody))
         }
 
     }

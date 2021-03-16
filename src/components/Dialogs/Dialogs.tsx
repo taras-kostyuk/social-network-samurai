@@ -3,7 +3,8 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogPageType} from "../../Redux/store";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
+import  {Field,reduxForm} from "redux-form";
 
 type DialogsPropsType = {
     dialogsPage: DialogPageType
@@ -34,8 +35,10 @@ let state = props.dialogsPage
         props.updateNewMessageBody(body)
 
     }
-    if (!props.isAuth) return <Redirect to ={"/login"}/>
+    const addNewMessage = (values:addNewMessageType) => {
 
+  props.sendMessage(values.newMessageBody)
+}
     return (
         <div className={s.dialogs}>
 
@@ -44,20 +47,42 @@ let state = props.dialogsPage
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <textarea
-                        onChange={onNewMessageChange}
-                        placeholder="Enter your message"
+                <AddMessageFormRedux onSubmit={addNewMessage} />
 
-                        value={newMessageBody}>
-                    </textarea>
-                </div>
-                <div>
-                    <button onClick={onSendMessageClick}>send</button>
-                </div>
 
 
             </div>
         </div>
     )
 }
+type addNewMessageType = {
+    newMessageBody:string
+}
+/*const addNewMessage = (values:addNewMessageType) => {
+
+  sendMessage(values.newMessageBody)
+}*/
+
+const AddMessageForm = (props:any) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component = "textarea" name = "newMessageBody"  placeHolder = " Enter your message"  />
+                <div>
+                    <button>send</button>
+                </div>
+            </div>
+
+    </form>
+    )
+}
+type FormDataType = {
+    newMessageBody:string
+}
+const AddMessageFormRedux = reduxForm<FormDataType>({form: "dialogAddMessageForm"}) (AddMessageForm)
+{/*<textarea
+                    onChange={onNewMessageChange}
+                    placeholder="Enter your message"
+
+                    value={newMessageBody}>
+                </textarea>*/}
