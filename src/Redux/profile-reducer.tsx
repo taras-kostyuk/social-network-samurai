@@ -24,10 +24,10 @@ export type ActionsTypes =
 
 
 
-export const addPostAC = (postMessageNew: string) => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: "ADD-POST",
-        postMessageNew: postMessageNew
+        newPostText: newPostText
     } as const
 }
 export const sendMessageAC = () => {
@@ -93,7 +93,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
         {
             const newPost: PostType = {
                 id: new Date().getTime(),
-                message: action.postMessageNew,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {

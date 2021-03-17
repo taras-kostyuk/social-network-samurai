@@ -1,12 +1,12 @@
 import {ActionsTypes} from "./store";
 
-export const updateNewMessageBody = (body: string) => {
+/*export const updateNewMessageBody = (body: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         body: body
     } as const
 
-}
+}*/
 export const sendMessage = (newMessageBody:string) => {
     return {
         type: "SEND-MESSAGE",
@@ -31,17 +31,13 @@ let InitialState = {
         {id: 4, message: 'YO'},
         {id: 5, message: 'YO'},
     ],
-    updateNewMessageBody: "",
+
     sendMessage: ""
 }
 
 export const dialogReducer = (state= InitialState, action:ActionsTypes) => {
 
-    if (action.type === "UPDATE-NEW-MESSAGE-BODY")
-    return {...state,
-        updateNewMessageBody: action.body}
-
-     else if (action.type === "SEND-MESSAGE"){
+      if (action.type === "SEND-MESSAGE"){
         let body = action.newMessageBody
     return {
             ...state,

@@ -1,9 +1,10 @@
-import {addPostAC, changeNewTextAC, PostType, RootStateType} from "../../../Redux/store";
+
 import {MyPosts} from "./MyPosts";
 import React  from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {RootStoreType} from "../../../Redux/redux-store";
+import {addPostAC, changeNewTextAC} from "../../../Redux/profile-reducer";
 
 
 /*type MyPostsContainerType = {
@@ -39,14 +40,7 @@ import {RootStoreType} from "../../../Redux/redux-store";
     )
 }*/
 
-type map = {
-    posts: Array<PostType>
-    messageForNewPost: string
-}
-type disp = {
-    changeNewText: (newText: string) => void
-    addPostHandler: (text:string) => void
-}
+
 
     let  mapStateToProps =(state:RootStoreType) => {
 
@@ -58,8 +52,8 @@ type disp = {
 let mapDispatchToProps = (dispatch:Dispatch) => {
 return{
     /*addPostHandler : (state:RootStateType) => {dispatch(addPostAC(state.profilePage.messageForNewPost))},*/
-    addPostHandler : (text:string) => {dispatch(addPostAC(text))},
-    changeNewText : (newText:string) => {dispatch(changeNewTextAC(newText))}
+   // addPostHandler : (text:string) => {dispatch(addPostAC(text))},
+    changeNewText : (newPostText:string) => {dispatch(addPostAC(newPostText))}
 
 }
     }

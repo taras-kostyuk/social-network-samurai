@@ -1,22 +1,37 @@
-import React, {ChangeEvent} from "react"
+import React from "react"
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostType} from "../../../Redux/store";
+import  {reduxForm,Field} from "redux-form";
+import {PostType} from "../../../Redux/profile-reducer";
 
 
 type MyPostsType = {
     changeNewText: (newText: string) => void
-    addPostHandler: (text:string) => void
+    //addPostHandler: (text: string) => void
     posts: Array<PostType>
     messageForNewPost: string
 
 }
+type onAddPostValueType = {
+    newPostText:string
+}
 
-export const MyPosts = (props:MyPostsType) => {
+let  AddNewPostForm = (props: any) => {
 
-    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+    return <form onSubmit={props.handleSubmit}>
 
+        <div> <Field name = "newPostText" component={"textarea"}/> </div>
+        <div> <button>Add post</button> </div>
+    </form>;
+}
 
+ let AddNewPostFormRedux = reduxForm <onAddPostValueType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
+
+export const MyPosts = (props: MyPostsType) => {
+
+    let postsElements = props.posts.map ( p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/> );
+
+/*
     let addPostHandler = () => {
 
         props.addPostHandler(props.messageForNewPost)
@@ -27,23 +42,18 @@ export const MyPosts = (props:MyPostsType) => {
 
         props.changeNewText(e.currentTarget.value)
 
-       // props.dispatch(changeNewTextAC(e.currentTarget.value))
+        // props.dispatch(changeNewTextAC(e.currentTarget.value))
+    }*/
+
+    let onAddPost = (values:onAddPostValueType) => {
+        props.changeNewText(values.newPostText)
     }
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea value={props.messageForNewPost}
-                              onChange={newTextChangeHandler}>
+            <AddNewPostFormRedux onSubmit={onAddPost}/>
 
-                    </textarea>
-                </div>
-                <div>
-                    <button onClick={addPostHandler}>Add post</button>
-                </div>
-            </div>
             <div className={s.posts}>
                 {postsElements}
             </div>
@@ -51,3 +61,8 @@ export const MyPosts = (props:MyPostsType) => {
     )
 
 }
+
+
+
+
+//{ value: string, onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void, onClick: () => void }
