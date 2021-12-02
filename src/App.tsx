@@ -10,7 +10,7 @@ import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
-import {Login} from "./components/Login/Login";
+import Login from "./components/Login/Login";
 
 
 

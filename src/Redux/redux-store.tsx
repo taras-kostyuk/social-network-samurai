@@ -4,9 +4,9 @@ import {profileReducer} from "./profile-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {dialogReducer} from "./dialogs-reducer";
 import {usersReducer} from "./user-reduser";
-import {authReducer} from "./auth-reduser";
-import  thunkMiddleware from "redux-thunk";
-import { reducer as formReducer } from 'redux-form'
+import {authReducer, LoginActionsType} from "./auth-reducer";
+import thunkMiddleware, {ThunkAction} from "redux-thunk";
+import {FormAction, reducer as formReducer} from 'redux-form'
 
 let reducers = combineReducers({
     profileReducer:profileReducer,
@@ -16,6 +16,7 @@ let reducers = combineReducers({
     auth:authReducer,
     form:formReducer
 })
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,RootStoreType,unknown,LoginActionsType | FormAction>
 export  type RootStoreType = ReturnType<typeof reducers>
 export let store = createStore(reducers,applyMiddleware(thunkMiddleware))
 

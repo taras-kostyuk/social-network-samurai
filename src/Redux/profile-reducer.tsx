@@ -64,7 +64,7 @@ let initialState = {
 export const setUserProfile = (profile:any) => ({type:SET_USER_PROFILE,profile} as const)
 export const setStatus = (status:string) => ({type:SET_STATUS,status} as const )
 
-export const getUserProfile = (userId:string) => (dispatch:Dispatch) => {
+export const getUserProfile = (userId:number) => (dispatch:Dispatch) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch( setUserProfile(response.data))
 
