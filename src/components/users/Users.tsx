@@ -2,8 +2,7 @@ import React from 'react';
 import styles from "./users.module.css";
 import userPhoto from "../../assets/image/user.png";
 import {UserType} from "./UsersContainer";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+
 
 
 type UsersType = {

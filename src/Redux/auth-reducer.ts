@@ -31,7 +31,7 @@ const SET_USER_DATA = 'SET_USER_DATA'
     isAuth:false
 
 }
-export const    authReducer = (state = initialState, action: ActionsTypes):InitialStateType => {
+export const authReducer = (state = initialState, action: ActionsTypes):InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
 
@@ -48,13 +48,15 @@ export const    authReducer = (state = initialState, action: ActionsTypes):Initi
 
 export const setAuthUserData = (id:number | null, email:string| null, login:string| null,isAuth:boolean ) => ({type:SET_USER_DATA,data:{id: id,email,login,isAuth, }})
 export const getAuthUserData = () => (dispatch:Dispatch) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
     if(response.data.resultCode === 0) {
         let{id,email,login} = response.data.data
         dispatch(setAuthUserData(id,email,login,true))
     }
 
-});}
+});
+
+}
 
 
 

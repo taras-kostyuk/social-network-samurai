@@ -3,10 +3,10 @@ import React from 'react';
 import './index.css';
 import { store} from "./Redux/redux-store";
 import ReactDOM from "react-dom";
-import {App} from "./App";
+import App from "./App";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import {RootStateType} from "./Redux/store";
+import {getAuthUserData} from "./Redux/auth-reducer";
 
 
     ReactDOM.render(
@@ -21,4 +21,3 @@ import {RootStateType} from "./Redux/store";
 
 
 
-// було в App state={state} store={store} dispatch={store.dispatch.bind(store)}

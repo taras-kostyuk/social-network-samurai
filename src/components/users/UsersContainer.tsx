@@ -108,7 +108,7 @@ let mapStateToProps = (state: RootStoreType) => {
 
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+
     connect(mapStateToProps,
         {
             follow,

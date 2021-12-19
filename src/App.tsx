@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -11,15 +11,28 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
 import Login from "./components/Login/Login";
+import {connect} from "react-redux";
+import {initializeApp} from "./Redux/app-reducer";
+import {RootStateType} from "./Redux/store";
+import {RootStoreType} from "./Redux/redux-store";
+import {Preloader} from "./components/common/Preloader/Preloader";
+
+type AppContainerPropsType = {
+    getAuthUserData: () => void
+}
 
 
+   class App extends React.Component< any > {
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader />
+        }
 
-
-export const App = () => {
-//let state =  props.store.getState()
-
-    return (
+        return (
 
             <div className="app-wrapper">
                 <HeaderContainer/>
@@ -40,6 +53,11 @@ export const App = () => {
             </div>
 
 
-    )
+        )
+    }
 }
+const mapStateToProps = (state:RootStoreType) => ({
+    initialized: state.app.initialized
+})
 
+export default  withRouter(connect(mapStateToProps, {initializeApp})(App))
