@@ -4,17 +4,24 @@ import {RootStoreType} from "../../Redux/redux-store";
 
 import {
     follow,
-    followSuccess, getUsers,
+     requestUsers,
     setCurrentPage,
     toggleFollowingProgress, unFollow,
-    unFollowSuccess
+
 } from "../../Redux/user-reduser";
 
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/users-selectors";
 
 export type UserType = {
 
@@ -92,7 +99,7 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
         </>
     }
 }
-
+/*
 let mapStateToProps = (state: RootStoreType) => {
 
     return {
@@ -102,6 +109,18 @@ let mapStateToProps = (state: RootStoreType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress:state.usersPage.followingInProgress
+
+    }
+}*/
+let mapStateToProps = (state: RootStoreType) => {
+
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress:getFollowingInProgress(state)
 
     }
 }
@@ -115,5 +134,5 @@ export default compose<React.ComponentType>(
             unFollow,
             setCurrentPage,
             toggleFollowingProgress,
-            getUsers
+            getUsers: requestUsers
         }))(UsersContainer)
